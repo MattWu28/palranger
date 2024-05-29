@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Open : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Open : MonoBehaviour
         Debug.Log("Collision");
         if(collision.gameObject.tag=="Player" && isOpen)
             {
-                Debug.Log("Switch Scene!");
+                SceneManager.LoadScene("House");
             }
     }
 
