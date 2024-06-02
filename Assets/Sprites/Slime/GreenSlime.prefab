@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5831706298161260859}
   m_Layer: 0
   m_Name: GreenSlime
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
   moveSpeed: 0.5
   chaseDist: 0.8
   opponentTag: Player
+  isChasing: 0
+  currentState: 0
   animator: {fileID: 5831706298161260859}
   compManager: {fileID: 0}
 --- !u!95 &5831706298161260859

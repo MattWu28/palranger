@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 175622750368910602}
   - component: {fileID: 2096068319948767503}
   - component: {fileID: 6281993324106309673}
-  - component: {fileID: 8887802052966090763}
+  - component: {fileID: 5160881762530940749}
   - component: {fileID: 4822106976877631271}
   m_Layer: 0
   m_Name: RedSlime
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,7 +165,7 @@ PolygonCollider2D:
       - {x: 0.095, y: -0.074999996}
       - {x: 0.095, y: 0.074999996}
   m_UseDelaunayMesh: 0
---- !u!114 &8887802052966090763
+--- !u!114 &5160881762530940749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,13 +174,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2279256381612289684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc27f817807e4604bbe0acabe1434454, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d4648042cce69445995c11c012c0841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
   moveSpeed: 0.5
   chaseDist: 0.8
   opponentTag: Player
+  isChasing: 0
+  color: red
+  currentState: 0
   animator: {fileID: 4822106976877631271}
   compManager: {fileID: 0}
 --- !u!95 &4822106976877631271
