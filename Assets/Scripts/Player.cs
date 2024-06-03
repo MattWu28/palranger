@@ -6,9 +6,7 @@ public class Player : MonoBehaviour
 {
     protected Rigidbody2D rigidBody;
     protected SpriteRenderer spriteRenderer;
-    public int health;
     [SerializeField]protected float moveSpeed;
-    public string opponentTag;
     public static Player Instance;
     Vector2 movement;
     public Animator animator;
@@ -38,31 +36,9 @@ public class Player : MonoBehaviour
     
     }
 
-    private void OnCollisionEnter(Collision collision){
-        Debug.Log("Collision");
-        if(collision.gameObject.tag=="Player")
-            {
-                Debug.Log("Battle!");
-                Destroy(gameObject);
-            }
-    }
-    
-    void FixedUpdate(){
-        
-    }
-
-    public void takeDamage(){
-        health = health - 1;
-        if(health<=0){
-            Destroy(gameObject);
-        }
-    }
-
     void Awake(){
         if(Instance == null){
             Instance = this;
         }
     }
-
-
 }

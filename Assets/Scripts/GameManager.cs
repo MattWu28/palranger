@@ -4,13 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject player;
+    public GameObject battleManager;
+    public GameObject battleUI;
     public GameObject[] emotes;
     public Vector3 playerPosition;
+    public GameObject playerPal;
     public GameObject encounteredMonster;
     public Material[] battleTransitionMaterials;
+    public Comp_Manager compManager;
+    private GameObject[] monsters;
     private Material currentMaterial;
     private GameObject mainCamera;
-    private GameObject playerPal;
     private SimpleBlit simpleBlitScript;
     private bool isTransitioning = false;
     private bool isPaused = false;
@@ -33,10 +38,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        SetMainCamera();
+        monsters = GameObject.FindGameObjectsWithTag("Monster");
     }
 
-    private void SetMainCamera()
+    private void ChooseTransition()
     {
         mainCamera = GameObject.Find("Main Camera");
 
@@ -60,10 +65,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator TransitionIn(string sceneName)
+    IEnumerator TransitionIn(GameObject monster)
     {
         isTransitioning = true;
-
+        ChooseTransition();
         // Increase cutoff from 0 to 1
         float timer = 0f;
         float transitionDuration = 1f;
@@ -81,21 +86,11 @@ public class GameManager : MonoBehaviour
 
         // Ensure the cutoff value is exactly 1 when the coroutine finishes
         currentMaterial.SetFloat("_Cutoff", 1f);
-
-        // Load the next scene asynchronously
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-
-        // Wait until the next scene is fully loaded
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
         currentMaterial.SetFloat("_Cutoff", 0f);
-        SetMainCamera();
-        StartCoroutine(TransitionOut(sceneName));
+        StartCoroutine(TransitionOut());
     }
 
-    IEnumerator TransitionOut(string sceneName)
+    IEnumerator TransitionOut()
     {
         float timer = 0f;
         float transitionDuration = 1f;
@@ -120,24 +115,37 @@ public class GameManager : MonoBehaviour
 
     public void LoadBattle(GameObject monster)
     {
-        if (!isTransitioning)
-        {
-            StartCoroutine(TransitionIn("MonsterBattle"));
+        if(!isTransitioning){
+            encounteredMonster = monster;
+            player.SetActive(false);
+            if (playerPal) {
+                playerPal.SetActive(false);
+            }
+            battleManager.SetActive(true);
+            battleUI.SetActive(true);
+            encounteredMonster.GetComponent<Slime>().currentState = Slime.State.battling;
+            StartCoroutine(TransitionIn(encounteredMonster));
         }
-        encounteredMonster = monster;
-        DontDestroyOnLoad(monster);
     }
 
     public void ExitBattle(bool wasCaptured)
     {
-        SceneManager.LoadSceneAsync("MainGame").completed += operation =>
-        {
-            SetMainCamera();
-            if (wasCaptured)
-            {
-                StartCoroutine(ShowEmote(emotes[0]));
-            }
-        };
+        player.SetActive(true);
+        if (playerPal) {
+            playerPal.SetActive(true);
+        }
+        battleManager.SetActive(false);
+        battleUI.SetActive(false);
+        if(!isTransitioning){
+            StartCoroutine(TransitionOut());
+        }
+        if(wasCaptured){
+            StartCoroutine(ShowEmote(emotes[0]));
+            compManager.updateCompanion(encounteredMonster.name);
+            Destroy(encounteredMonster);
+        }else{
+            encounteredMonster.GetComponent<Slime>().currentState = Slime.State.idle;
+        }
     }
 
     public GameObject GetPal()
@@ -148,6 +156,7 @@ public class GameManager : MonoBehaviour
     public void SetPal(GameObject pal)
     {
         playerPal = pal;
+        DontDestroyOnLoad(playerPal);
     }
 
     public void PauseGame()

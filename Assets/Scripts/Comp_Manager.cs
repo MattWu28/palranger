@@ -8,10 +8,9 @@ public class Comp_Manager : MonoBehaviour
 {
     public GameObject GreenSlime;
     public GameObject RedSlime;
-    public GameObject PlaceHolder;
-    private GameObject currentCompanion;
     public Canvas DialogueBox;
     public GameObject popUpBox;
+    private GameObject currentCompanion;
     private TMP_Text popUpText;
     private bool wait;
     private bool yes;
@@ -22,7 +21,6 @@ public class Comp_Manager : MonoBehaviour
     void Start()
     {
         wait = true;
-        currentCompanion = PlaceHolder;
 
         if(Comp_Data.hasComp){
             if(Comp_Data.currentComp == "green"){
@@ -50,53 +48,38 @@ public class Comp_Manager : MonoBehaviour
         }
     }
 
-
-    private IEnumerator updater(string companionName){
+    private IEnumerator updater(string monsterName){
         popUpBox.SetActive(true);
+        Debug.Log("PopUp");
         Time.timeScale = 0f;
 
         while(wait){
+            Debug.Log("Waiting");
             yield return new WaitForSecondsRealtime(0.1f);
+            Debug.Log("Done Waiting");
         }
 
-        if(companionName=="GreenSlime"){
-            if(yes){
-                Comp_Data.hasComp = true;
-                Destroy(currentCompanion);
+        if(yes){
+            Destroy(currentCompanion);
+            if (monsterName.Contains("GreenSlime")) {
                 currentCompanion = Instantiate(GreenSlime, transform.position, transform.rotation);
-                wait = true;
-                Time.timeScale = 1f;
-                popUpBox.SetActive(false);
                 Comp_Data.currentComp = "green";
-            }
-            else{
-                wait = true;
-                Time.timeScale = 1f;
-                popUpBox.SetActive(false);
-            }
-            
-        }
-
-        if(companionName=="RedSlime"){
-            if(yes){
-                Comp_Data.hasComp= true;
-                Destroy(currentCompanion);
+            } else if (monsterName.Contains("RedSlime")) {
                 currentCompanion = Instantiate(RedSlime, transform.position, transform.rotation);
-                wait = true;
-                Time.timeScale = 1f;
-                popUpBox.SetActive(false);
                 Comp_Data.currentComp = "red";
             }
-            else{
-                wait = true;
-                Time.timeScale = 1f;
-                popUpBox.SetActive(false);
-            }
-            
+            GameManager.instance.SetPal(currentCompanion);
+            wait = true;
+            Time.timeScale = 1f;
+            popUpBox.SetActive(false);
+        }
+        else{
+            wait = true;
+            Time.timeScale = 1f;
+            popUpBox.SetActive(false);
         }
         Debug.Log("Done");
         yield return null;
-
     }
 
     public void updateCompanion(string companionName){

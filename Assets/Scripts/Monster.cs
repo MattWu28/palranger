@@ -6,11 +6,13 @@ public abstract class Monster : MonoBehaviour
 {
     protected Rigidbody2D rigidBody;
     protected SpriteRenderer spriteRenderer;
-    public int health;
     [SerializeField]protected float moveSpeed, chaseDist;
-
     protected Vector2 moveDirection;
+    protected float minMoveDuration = 1f;
+    protected float maxMoveDuration = 3f;
+    protected float timer = 0f;
     public string opponentTag;
+    public bool isChasing = false;
 
     void Start(){
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -24,12 +26,15 @@ public abstract class Monster : MonoBehaviour
 
     void FixedUpdate(){Move();}
 
-    
+    public void GenerateRandomDirection()
+    {
+        moveDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f).normalized;
+        timer = Random.Range(minMoveDuration, maxMoveDuration);
+    }
 
-    public void takeDamage(){
-        health = health - 1;
-        if(health<=0){
-            Destroy(gameObject);
+    void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.tag=="Player") {
+            GameManager.instance.LoadBattle(gameObject);
         }
     }
 }

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime Companion Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4476115681726751146, guid: db4fe5cf018527546918f30b201b9290, type: 3}
+      propertyPath: m_TagString
+      value: Companion
+      objectReference: {fileID: 0}
     - target: {fileID: 5775528171142055008, guid: db4fe5cf018527546918f30b201b9290, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.21317673

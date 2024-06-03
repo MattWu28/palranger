@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class LoopCapture : MonoBehaviour
 {
     // Public variables
-    public float drawRadius = 0.1f;
+    public float drawRadius = 0.01f;
 
     public Color drawColor = Color.white;
 
@@ -37,6 +37,9 @@ public class LoopCapture : MonoBehaviour
 
     void Start()
     {
+    }
+
+    void OnEnable() {
         targetObjects = GameObject.FindGameObjectsWithTag("Monster");
         audioSource.clip = loopClip;
     }
@@ -82,7 +85,11 @@ public class LoopCapture : MonoBehaviour
     {
         isDrawing = false;
         successiveLoops = 0;
-        Destroy (currentLineObject);
+        Destroy(currentLineObject);
+    }
+
+    void OnDisable() {
+        StopDrawing();
     }
 
     void Draw()
