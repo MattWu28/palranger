@@ -55,8 +55,11 @@ public class RedSlime : Monster
 
     private void OnDestroy()
     {
-        Debug.Log("destroyed");
-        compManager.updateCompanion("RedSlime");
+        if(gameObject.scene.isLoaded) //Was Deleted
+        {
+            Debug.Log("destroyed");
+            compManager.updateCompanion("RedSlime");
+        }        
     }
 }
 

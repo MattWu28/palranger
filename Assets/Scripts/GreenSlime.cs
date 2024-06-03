@@ -55,8 +55,10 @@ public class Slime : Monster
 
     private void OnDestroy()
     {
-        Debug.Log("destroyed");
-        compManager.updateCompanion("GreenSlime");
+        if(gameObject.scene.isLoaded) //Was Deleted
+        {
+            compManager.updateCompanion("GreenSlime");
+        }
     }
 }
 

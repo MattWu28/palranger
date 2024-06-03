@@ -5,7 +5,7 @@ using UnityEngine;
 public class OpenCon : MonoBehaviour
 {
     public GameObject door;
-    public Open house;
+    public Open1 house;
 
     // Start is called before the first frame update
     void Start()

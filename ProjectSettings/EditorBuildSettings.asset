@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MonsterBattle.unity
     guid: 41d8f6b4b944d4d31b97acce15fdbabe
   - enabled: 1
+    path: Assets/Scenes/House.unity
+    guid: bdc4c96ef60fea54ba662456ceae133f
+  - enabled: 1
     path: Assets/Scenes/Death.unity
     guid: 4c4dacb1fa9abf648806fc9e4c6129ea
   - enabled: 1
