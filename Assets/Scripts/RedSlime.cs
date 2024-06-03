@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class RedSlime : Monster
 {
-
     Transform targetPosition;
-    private enum State{idle,Chase};
-    State currentState;
+    public enum State{idle,chase,battling};
+    public State currentState;
     public Animator animator;
     private Vector3 Scale;
     public Comp_Manager compManager;
@@ -20,16 +19,31 @@ public class RedSlime : Monster
 
     void Update()
     {
-        if (currentState == State.idle){
-            animator.SetBool("isMove",false);
-            if((transform.position-targetPosition.position).magnitude < chaseDist){
-                currentState = State.Chase;
+        if(currentState == State.battling){
+            isChasing = false;
+            if(timer <= 0f){
+                GenerateRandomDirection();
             }
-        }
-        else{
-            Vector3 direction = (targetPosition.position - transform.position).normalized;
-            moveDirection = direction;
             animator.SetBool("isMove",true);
+            timer -= Time.deltaTime;
+        }else{
+            float distToPlayer = Vector3.Distance(transform.position, targetPosition.position);
+            // If the player is within chaseDist, chase the player
+            if(distToPlayer <= chaseDist){
+                isChasing = true;
+            }else{
+                isChasing = false;
+            }
+
+            if(isChasing){
+                Vector3 direction = (targetPosition.position - transform.position).normalized;
+                moveDirection = direction;
+                animator.SetBool("isMove",true);
+            }
+            else{
+                moveDirection = Vector3.zero;
+                animator.SetBool("isMove",false);
+            }
         }
     }
 
@@ -44,19 +58,9 @@ public class RedSlime : Monster
         }
     }
 
-
-
-    void OnCollisionEnter2D(Collision2D collision){
-        if(collision.gameObject.tag=="Player")
-            {
-                Destroy(gameObject);
-            }
-    }
-
     private void OnDestroy()
     {
         Debug.Log("destroyed");
-        compManager.updateCompanion("RedSlime");
     }
 }
 
