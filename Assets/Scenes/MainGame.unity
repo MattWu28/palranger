@@ -397,62 +397,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1549065794
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1549065796}
-  - component: {fileID: 1549065795}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1549065795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549065794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 176eeddbda2184bbe98f7281783f8eb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emotes:
-  - {fileID: 3571268930284544116, guid: 517e805fb4bf54e4ca3860615f2af3d3, type: 3}
-  playerPosition: {x: 0, y: 0, z: 0}
-  encounteredMonster: {fileID: 0}
-  battleTransitionMaterials:
-  - {fileID: 2100000, guid: 1a10a8ddf28c547f4a6452bdae87c518, type: 2}
-  - {fileID: 2100000, guid: 7624d611bd330e44b80ef65275598a16, type: 2}
-  - {fileID: 2100000, guid: 950cd9a346081428cafc72c11b35e6e1, type: 2}
-  - {fileID: 2100000, guid: c6e5af351d70547238a3003574414b1b, type: 2}
-  - {fileID: 2100000, guid: ac9f3dc3568f846dd8f489614c1600c2, type: 2}
-  - {fileID: 2100000, guid: 4299bb5ac013e430caab86164ba78a24, type: 2}
-  - {fileID: 2100000, guid: e2bcdc19059a74c73b9a09e85f5de367, type: 2}
---- !u!4 &1549065796
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549065794}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1808287187
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +593,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1549065796}
   - {fileID: 1808287190}
   - {fileID: 2037291285}
   - {fileID: 1322399033}

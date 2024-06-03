@@ -43,22 +43,11 @@ public class Slime : Monster
             spriteRenderer.flipX = false;
         }
     }
-
-
-
     void OnCollisionEnter2D(Collision2D collision){
         if(collision.gameObject.tag=="Player")
             {
                 Destroy(gameObject);
             }
-    }
-
-    private void OnDestroy()
-    {
-        if(gameObject.scene.isLoaded) //Was Deleted
-        {
-            compManager.updateCompanion("GreenSlime");
-        }
     }
 }
 
