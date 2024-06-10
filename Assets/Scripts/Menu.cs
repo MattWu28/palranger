@@ -32,4 +32,8 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
+    public void Tutorial(){
+        SceneManager.LoadScene("Tutorial");
+    }
+
 }

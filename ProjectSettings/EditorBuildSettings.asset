@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OverWorld.unity
     guid: 2fa008a2473bf2a4c9cb1e79578c4b14
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 698be067c288a21429d7b55c623bff5d
   m_configObjects: {}
