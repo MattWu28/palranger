@@ -66,5 +66,6 @@ public class Slime : Monster
 
     void Attack() {
         animator.SetTrigger("isAttacking");
+        BattleManager.instance.PlayerTakeDamage(14);
     }
 }
