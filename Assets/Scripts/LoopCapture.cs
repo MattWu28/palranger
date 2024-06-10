@@ -10,12 +10,14 @@ public class LoopCapture : MonoBehaviour
     public Color drawColor = Color.white;
 
     public AudioClip loopClip;
+    
     public AudioClip[] successiveClips;
 
     public AudioSource audioSource;
 
+    public bool isDrawing = false;
+
     // Private variables
-    private bool isDrawing = false;
 
     private List<Vector3> linePoints = new List<Vector3>();
 

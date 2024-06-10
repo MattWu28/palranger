@@ -9,7 +9,8 @@ public class BattleManager : MonoBehaviour
     public GameObject keepPalUI;
     [SerializeField] int monsterMaxHealth;
     [SerializeField] int playerMaxHealth;
-    private int monsterHealth, playerHealth;
+    private int monsterHealth;
+    private int playerHealth;
     private LoopCapture loopCapture;
 
     // Singleton pattern to ensure GameManager persists between scenes
@@ -26,6 +27,7 @@ public class BattleManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        playerHealth = playerMaxHealth;
     }
 
     void OnEnable()
@@ -54,7 +56,7 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log("Defeated!");
             GameManager.instance.ExitBattle(false);
-        }
+        } 
     }
 
     // Move to game manager later to restore player, player position
