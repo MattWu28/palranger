@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private SimpleBlit simpleBlitScript;
     private bool isTransitioning = false;
     private bool isPaused = false;
+    public AudioSource audioSource;
 
     // Singleton pattern to ensure GameManager persists between scenes
     public static GameManager instance;
@@ -34,11 +35,23 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        player.transform.position = new Vector2(0,0);
+        if(playerPal != null){
+            playerPal.transform.position = new Vector2(0,0);
+        }
+        
     }
 
     void Start()
     {
         monsters = GameObject.FindGameObjectsWithTag("Monster");
+        audioSource.Play();
+        player.transform.position = new Vector2(0,0);
     }
 
     private void ChooseTransition()
@@ -125,6 +138,7 @@ public class GameManager : MonoBehaviour
             battleUI.SetActive(true);
             encounteredMonster.GetComponent<Slime>().currentState = Slime.State.battling;
             StartCoroutine(TransitionIn(encounteredMonster));
+            audioSource.Stop();
         }
     }
 
@@ -146,6 +160,7 @@ public class GameManager : MonoBehaviour
         }else{
             encounteredMonster.GetComponent<Slime>().currentState = Slime.State.idle;
         }
+        audioSource.Play();
     }
 
     public GameObject GetPal()

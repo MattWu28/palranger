@@ -28,4 +28,12 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Overworld");
     }
 
+    public void MainMenu(){
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    public void Tutorial(){
+        SceneManager.LoadScene("Tutorial");
+    }
+
 }
