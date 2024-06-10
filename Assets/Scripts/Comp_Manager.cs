@@ -78,6 +78,7 @@ public class Comp_Manager : MonoBehaviour
             Time.timeScale = 1f;
             popUpBox.SetActive(false);
         }
+        
         Debug.Log("Done");
         yield return null;
     }

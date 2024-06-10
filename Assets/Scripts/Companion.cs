@@ -38,9 +38,16 @@ public class Companion : MonoBehaviour
             moveDirection = direction;
             animator.SetBool("isMove",true);
             Move();
+            Debug.Log(transform.position);
+            Debug.Log(targetPosition.position);
             if((transform.position-targetPosition.position).magnitude < chaseDist){
                 currentState = State.idle;
                 rigidBody.velocity = new Vector2(0,0);
+            }
+            if((transform.position-targetPosition.position).magnitude > 1.3)
+            {
+                
+                transform.position = new Vector2(targetPosition.position.x-0.07f,targetPosition.position.y);
             }
         }
     }
